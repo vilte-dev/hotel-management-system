@@ -1,103 +1,343 @@
-.App {
+/* --- VARIABLES DE COLOR (Esencia Chapaca) --- */
+:root {
+  --vino-profundo: #5d001e; /* Color tinto guinda */
+  --beige-laja: #f8f6f0;    /* Fondo cálido piedra */
+  --marron-madera: #3e2723;   /* Texto secundario */
+  --gris-suave: #e0e0e0;
+  --blanco: #ffffff;
+  --dorado-sol: #f1c40f;
+  
+  /* Fuentes */
+  --fuente-titulo: 'Lora', serif; /* Elegante, rústica */
+  --fuente-cuerpo: 'Inter', sans-serif; /* Moderna, legible */
+}
+
+/* --- ESTILOS GLOBALES --- */
+body {
+  margin: 0;
+  background-color: var(--beige-laja);
+  color: var(--marron-madera);
+  font-family: var(--fuente-cuerpo);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- HEADER / HERO SECTION --- */
+.hero-alzau {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), 
+              url('https://source.unsplash.com/featured/?vineyard,sun,tarija') center/cover;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blanco);
   text-align: center;
-  background-color: #f4f7f6; /* El gris suave de fondo */
-  min-height: 100vh;
-  padding: 40px 20px;
-  font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-h1 {
-  color: #2c3e50;
-  margin-bottom: 40px;
+.hero-content {
+  max-width: 700px;
+}
+
+.hero-content h1 {
+  font-family: var(--fuente-titulo);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--blanco); /* Sobreescribimos */
+  margin-bottom: 5px;
+  text-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: #f1ede3;
+  margin-top: 0;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* --- BARRA DE BÚSQUEDA (El 'Buscador Refugio') --- */
+.search-alzau {
+  background: var(--blanco);
+  padding: 12px;
+  border-radius: 50px;
+  display: flex;
+  gap: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  margin-top: 35px;
+  align-items: center;
+}
+
+.search-alzau input, .search-alzau select {
+  font-family: var(--fuente-cuerpo);
+  padding: 14px 22px;
+  border: 1px solid var(--gris-suave);
+  border-radius: 30px;
+  flex: 1;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-alzau input:focus { border-color: var(--vino-profundo); }
+
+/* --- BOTONES PRINCIPALES (Con Grana Chapaca) --- */
+.btn-alzau {
+  font-family: var(--fuente-cuerpo);
+  background: linear-gradient(135deg, var(--vino-profundo), #800020);
+  color: var(--blanco);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
   font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(93, 0, 30, 0.3);
 }
 
-/* Formulario minimalista */
+.btn-alzau:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(93, 0, 30, 0.4);
+}
+
+/* --- PANEL ADMIN (DISCRETO) --- */
+.admin-section {
+  padding: 30px 20px;
+}
+
+.admin-section summary {
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
 .room-form {
-  background: white;
+  background: var(--blanco);
   padding: 20px;
   border-radius: 12px;
-  max-width: 700px;
-  margin: 0 auto 50px;
-  display: flex;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.room-form input, .room-form select {
-  padding: 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  flex: 1;
-}
-
-.room-form button {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* Las tarjetas que te gustaban */
-.room-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  max-width: 1100px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  border: 1px solid var(--gris-suave);
 }
 
-.room-card {
-  background: white;
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  border-top: 6px solid #3498db; /* Ese borde azul característico */
-  position: relative;
-  transition: transform 0.2s;
+.room-form input {
+  font-family: var(--fuente-cuerpo);
+  padding: 10px;
+  border: 1px solid var(--gris-suave);
+  border-radius: 8px;
 }
 
-.room-card:hover {
-  transform: translateY(-5px);
-}
-
-.room-card h3 {
-  color: #2c3e50;
-  margin-top: 0;
-  font-size: 1.4rem;
-}
-
-.room-card p {
-  color: #7f8c8d;
-  margin: 8px 0;
-}
-
-/* Botones discretos */
-.btn-status {
+.btn-add {
+  font-family: var(--fuente-cuerpo);
+  background-color: var(--marron-madera);
+  color: var(--blanco);
   border: none;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  margin-top: 15px;
-  transition: opacity 0.2s;
 }
 
-.btn-available { background-color: #2ecc71; color: white; }
-.btn-occupied { background-color: #e74c3c; color: white; }
+/* --- LISTA DE HABITACIONES (Style Leonardo) --- */
+.hotel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-.btn-delete-small {
+.card-alzau {
+  display: flex;
+  background: var(--blanco);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  text-align: left;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.card-alzau:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+.card-image {
+  flex: 1;
+  max-width: 320px;
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Botón de borrar discreto sobre la imagen */
+.btn-delete-float {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: none;
+  background: rgba(255, 255, 255, 0.7);
   border: none;
-  color: #bdc3c7;
-  font-size: 1.2rem;
+  color: #7f8c8d;
+  font-size: 1.4rem;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  line-height: 28px;
+  padding: 0;
+  transition: 0.2s;
 }
 
-.btn-delete-small:hover { color: #e74c3c; }
+.btn-delete-float:hover { background: rgba(231, 76, 60, 0.9); color: white; }
+
+/* Detalles de la Tarjeta */
+.card-details {
+  flex: 2;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-details h3 {
+  font-family: var(--fuente-titulo);
+  font-size: 1.6rem;
+  margin: 0;
+  color: var(--marron-madera);
+}
+
+.room-type-text {
+  font-family: var(--fuente-cuerpo);
+  color: #7f8c8d;
+  margin: 4px 0 15px;
+}
+
+.rating-score {
+  font-family: var(--fuente-titulo);
+  font-size: 1.2rem;
+  color: var(--dorado-sol);
+}
+
+/* Amenities con iconos */
+.amenities-list {
+  margin: 15px 0;
+  display: flex;
+  gap: 20px;
+  color: #7f8c8d;
+  font-size: 0.95rem;
+}
+
+/* Sección de Precio y Estado (Alineación Pro) */
+.price-booking-section {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border-top: 1px solid #f1ede3;
+  padding-top: 15px;
+  gap: 20px;
+}
+
+.price-display { display: flex; flex-direction: column; align-items: flex-end; }
+.price-tag {
+  font-family: var(--fuente-titulo);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--vino-profundo);
+  line-height: 1;
+}
+.price-period { font-size: 0.8rem; color: #7f8c8d; margin-top: 4px; }
+
+/* Botón de Estado Dinámico (Available/Occupied) */
+.btn-status {
+  font-family: var(--fuente-cuerpo);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+}
+
+.btn-available { background-color: var(--vino-profundo); color: var(--blanco); }
+.btn-occupied { background-color: #eee; color: #7f8c8d; cursor: not-allowed; }
+
+/* --- FOOTER --- */
+.footer-alzau {
+  background-color: var(--marron-madera);
+  color: #f1ede3;
+  padding: 30px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.footer-alzau p { font-size: 0.9rem; margin: 0; }
+/* --- BOTÓN DE RESERVA (En las tarjetas) --- */
+.status-btn {
+  font-family: 'Inter', sans-serif;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+/* Cuando está disponible (Color Vino Alzau) */
+.is-free {
+  background-color: #5d001e; /* Tinto Alzau */
+  color: white;
+}
+
+.is-free:hover {
+  background-color: #800020;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(93, 0, 30, 0.3);
+}
+
+/* Cuando está ocupada (Gris elegante) */
+.is-busy {
+  background-color: #e0e0e0;
+  color: #7f8c8d;
+  cursor: not-allowed;
+}
+
+/* --- BOTÓN DEL BUSCADOR (Hero Section) --- */
+.btn-alzau-main {
+  font-family: 'Inter', sans-serif;
+  background-color: #5d001e;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px; /* Redondeado para el buscador */
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-alzau-main:hover {
+  background-color: #800020;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* --- BOTÓN DEL PANEL ADMIN (Discreto) --- */
+.btn-save {
+  background-color: #3e2723; /* Marrón madera */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
