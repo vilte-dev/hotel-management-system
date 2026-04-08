@@ -4,6 +4,8 @@ import './App.css';
 
 function App() {
   const [rooms, setRooms] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); // Para el texto
+  const [filterType, setFilterType] = useState('ALL'); // Para el select
   const [newRoom, setNewRoom] = useState({
     number: '',
     room_type: 'SNG',
@@ -55,6 +57,11 @@ function App() {
       }
     }
   };
+  const filteredRooms = rooms.filter(room => {
+  const matchesSearch = room.number.toString().includes(searchTerm);
+  const matchesType = filterType === 'ALL' || room.room_type === filterType;
+  return matchesSearch && matchesType;
+  });
 
   return (
     <div className="App">
@@ -65,15 +72,14 @@ function App() {
           <p className="subtitle-alzau">Donde el sol calienta y el vino alegra el alma.</p>
           
           <div className="search-alzau">
-            <input type="text" placeholder="¿Cuándo venís a Tarija?" />
-            <select 
-              value={newRoom.room_type}
-              onChange={(e) => setNewRoom({...newRoom, room_type: e.target.value})}
-            >
+            <input type="text" placeholder="N° de habitación..." value={searchTerm}onChange={(e) => setSearchTerm(e.target.value)} />
+            <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+              <option value="ALL">Todos los tipos</option>
               <option value="SNG">Simple (Single)</option>
               <option value="DBL">Doble (Double)</option>
               <option value="SUT">Suite Alzau</option>
             </select>
+
             <button className="btn-alzau-main">Buscar Refugio</button>
           </div>
         </div>
@@ -105,8 +111,8 @@ function App() {
 
         {/* LISTA DE HABITACIONES: Estilo Leonardo / Profesional */}
         <section className="hotel-list">
-          {rooms.map(room => (
-            <article key={room.id} className="card-alzau">
+          {filteredRooms.map(room => (
+              <article key={room.id} className="card-alzau">
               <div className="card-image">
                 <img src={`https://picsum.photos/seed/${room.number}/400/300`} alt="Habitación" />
                 <button className="btn-delete-float" onClick={() => deleteRoom(room.id)}>×</button>
