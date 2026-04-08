@@ -3,9 +3,10 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
+  const [isAdmin, setIsAdmin] = useState(false); 
   const [rooms, setRooms] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(''); // Para el texto
-  const [filterType, setFilterType] = useState('ALL'); // Para el select
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterType, setFilterType] = useState('ALL'); 
   const [newRoom, setNewRoom] = useState({
     number: '',
     room_type: 'SNG',
@@ -65,7 +66,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* SECCIÓN HERO: El alma de Tarija */}
       <header className="hero-alzau">
         <div className="hero-content">
           <h1 className="title-alzau">Hotel El Alzau</h1>
@@ -86,7 +86,7 @@ function App() {
       </header>
 
       <main className="container-alzau">
-        {/* PANEL DE ADMINISTRACIÓN (Formulario arriba, pero discreto) */}
+        {isAdmin && (
         <section className="admin-section">
           <details>
             <summary>⚙️ Registrar Nueva Habitación (Panel Admin)</summary>
@@ -107,15 +107,15 @@ function App() {
               <button type="submit" className="btn-save">Guardar Habitación</button>
             </form>
           </details>
-        </section>
-
+        </section>)}
+        
         {/* LISTA DE HABITACIONES: Estilo Leonardo / Profesional */}
         <section className="hotel-list">
           {filteredRooms.map(room => (
               <article key={room.id} className="card-alzau">
               <div className="card-image">
                 <img src={`https://picsum.photos/seed/${room.number}/400/300`} alt="Habitación" />
-                <button className="btn-delete-float" onClick={() => deleteRoom(room.id)}>×</button>
+                {isAdmin && (<button className="btn-delete-float" onClick={() => deleteRoom(room.id)}>×</button>)}
               </div>
               
               <div className="card-details">
